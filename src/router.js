@@ -1,4 +1,7 @@
+import React from 'react'
 import Router from 'ampersand-router'
+import PublicPage from './pages/public'
+import ReposPage from './pages/repos'
 
 export default Router.extend({
   routes: {
@@ -7,10 +10,10 @@ export default Router.extend({
   },
   
   public () {
-    console.log('PUBLIC PAGE');
+    React.render(<PublicPage/>, document.body)
   },
   
   repos (){
-    console.log("REPOS PAGE");
+    React.render(<ReposPage/>, document.body)
   },
 })
