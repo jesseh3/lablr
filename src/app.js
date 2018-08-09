@@ -1,11 +1,12 @@
-import React from 'react'
 import styles from './styles/main.styl'
+import Router from './router'
 
-const Hello = React.createClass({
-  displayName: "Hello",
-  render () {
-    return <div><h1>Hello, {this.props.name}</h1></div>
+window.app = {
+  init () {
+    this. router = new Router()
+    // history is a singleton that all routers reference
+    this.router.history.start()
   }
-})
+}
 
-React.render(<Hello name="PEOPLE!"/>, document.body)
+window.app.init()
