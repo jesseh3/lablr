@@ -4,8 +4,12 @@
   "description": "A way to manage labels on Github.",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "surge --project ./public/ --domain shivering-holiday.surge.sh"
+    "deploy": "surge --project ./public/ --domain shivering-holiday.surge.sh",
+    "prebuild": "rm -rf public && mkdir public",
+    "build": "NODE_ENV=production webpack",
+    "launch": "npm run build && npm run deploy"
   },
   "author": "",
   "license": "ISC",
