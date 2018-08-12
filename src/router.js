@@ -23,7 +23,8 @@ export default Router.extend({
     "repos": "repos",
     "login": "login",
     "logout": "logout",
-    "auth/callback": "authCallback"
+    /* :code is grabbing the string following "=" and passing to "authCallback" */
+    "auth/callback?code=:code": "authCallback"
   },
 
   public () {
@@ -47,7 +48,7 @@ export default Router.extend({
 
   },
 
-  authCallback () {
-
+  authCallback (code) {
+    console.log(code);
   }
 })
