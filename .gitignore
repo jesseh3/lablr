@@ -81,3 +81,8 @@ public/*
 !public/.gitkeep
 
 # End of https://www.gitignore.io/api/node
+
+################
+# my additions
+
+package-lock.json
