@@ -24,8 +24,8 @@ export default Router.extend({
     "repos": "repos",
     "login": "login",
     "logout": "logout",
-    /* :code is grabbing the string following "=" and passing to "authCallback" */
-    "auth/callback?code=:code": "authCallback"
+    /* :query is grabbing the entire query string following "?" and passing to "authCallback" */
+    "auth/callback?:query": "authCallback"
   },
 
   public () {
@@ -52,7 +52,13 @@ export default Router.extend({
 
   },
 
-  authCallback (code) {
-    console.log(code);
+  authCallback (query) {
+    query = qs.parse(query)
+    console.log(query);
+    console.log(window.localStorage.state);
+    if (query.state === window.localStorage.state) {
+        console.log("MATCH!");
+    }
+    delete window.localStorage.state
   }
 })
