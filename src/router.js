@@ -2,6 +2,7 @@ import app from 'ampersand-app'
 import React from 'react'
 import qs from 'qs'
 import uuid from 'node-uuid'
+import xhr from 'xhr'
 import Router from 'ampersand-router'
 import PublicPage from './pages/public'
 import ReposPage from './pages/repos'
@@ -54,11 +55,16 @@ export default Router.extend({
 
   authCallback (query) {
     query = qs.parse(query)
-    console.log(query);
-    console.log(window.localStorage.state);
     if (query.state === window.localStorage.state) {
-        console.log("MATCH!");
+        delete window.localStorage.state
+        xhr({
+            url: "https://lablr-gatekeeper-aaa.herokuapp.com/authenticate/" + query.code
+          },
+          (err, resp, body) => {
+            console.log(body);
+          }
+        )
     }
-    delete window.localStorage.state
+
   }
 })
