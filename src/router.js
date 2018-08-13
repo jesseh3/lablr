@@ -50,7 +50,8 @@ export default Router.extend({
   },
 
   logout () {
-
+      window.localStorage.clear()
+      window.location = '/' // redundant page refresh to enusre local memory is clear and user token not hanging around
   },
 
   authCallback (query) {
@@ -58,10 +59,18 @@ export default Router.extend({
     if (query.state === window.localStorage.state) {
         delete window.localStorage.state
         xhr({
-            url: "https://lablr-gatekeeper-aaa.herokuapp.com/authenticate/" + query.code
+            url: "https://lablr-gatekeeper-aaa.herokuapp.com/authenticate/" + query.code,
+            json: true
           },
           (err, resp, body) => {
-            console.log(body);
+            if (err) {
+              console.error('something went wrong');
+            } else {
+              // this will trigger a change event (becuase using predefined prop\)
+              // not "set" method need for that (like in backbone)
+              app.me.token = body.token
+              this.redirectTo('repos')
+            }
           }
         )
     }
