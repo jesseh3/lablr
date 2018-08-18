@@ -13,7 +13,7 @@ export default Router.extend({
     if (opts.layout)
     {
       page = (
-        <Layout>
+        <Layout me={app.me} >
         {page}
         </Layout>
       )
