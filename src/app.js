@@ -9,6 +9,7 @@ window.app = app
 app.extend({
   init () {
     this.me = new Me()
+    this.me.fetchInitialData()
     this. router = new Router()
     // history is a singleton that all routers reference
     this.router.history.start()
