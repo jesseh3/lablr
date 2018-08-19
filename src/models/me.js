@@ -30,6 +30,7 @@ export default Model.extend(githubMixin, {
   fetchInitialData () {
     if (this.token){
       this.fetch()
+      this.repos.fetch()
     }
   },
 })
