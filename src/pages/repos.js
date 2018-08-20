@@ -12,8 +12,8 @@ export default React.createClass({
         <div>
           {repos.map((repo) => {
               return (
-                <div>
-                  <a href="#" style={{fontSize: '45px'}}>
+                <div key={repo.id}>
+                  <a href={repo.app_url} style={{fontSize: '45px'}}>
                     {repo.full_name}
                   </a>
                 </div>

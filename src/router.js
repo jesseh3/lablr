@@ -6,6 +6,7 @@ import xhr from 'xhr'
 import Router from 'ampersand-router'
 import PublicPage from './pages/public'
 import ReposPage from './pages/repos'
+import RepoDetailPage from './pages/repo-detail'
 import Layout from './layout'
 
 export default Router.extend({
@@ -25,8 +26,9 @@ export default Router.extend({
     "repos": "repos",
     "login": "login",
     "logout": "logout",
+    "repo/:owner/:name": "repoDetail",
     /* :query is grabbing the entire query string following "?" and passing to "authCallback" */
-    "auth/callback?:query": "authCallback"
+    "auth/callback?:query": "authCallback",
   },
 
   public () {
@@ -35,6 +37,12 @@ export default Router.extend({
 
   repos (){
     this.renderPage(<ReposPage repos={app.me.repos}/>)
+  },
+
+  repoDetail (owner, name) {
+    console.log(owner,name);
+    const repo = app.me.repos.getByFullName(owner + '/' + name)
+    this.renderPage(<RepoDetailPage repo={repo}/>)
   },
 
   login () {
