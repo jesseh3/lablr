@@ -27,8 +27,7 @@ export default Model.extend(githubMixin, {
   },
 
   fetch () {
-    // fetch this
-    Model.prototype.fetch.call(this, arguments)
+    Model.prototype.fetch.apply(this, arguments)
     this.labels.fetch()
   },
 })
