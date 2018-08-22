@@ -31,7 +31,7 @@ export default React.createClass({
 
   onColorChange (event) {
     this.setState({
-      color: event.target.value
+      color: event.target.value.slice(1)
     })
   },
 
@@ -56,7 +56,7 @@ export default React.createClass({
         <form onSubmit={this.onSubmitForm} className='label'>
           <span style={{backgroundColor: cssColor}} className='label-color avatar avatar-small avatar-rounded'>&nbsp;</span>
           <input onChange={this.onNameChange} value={name} name='name'/>
-          <input onChange={this.onColorChange} value={color} name='color'/>
+          <input onChange={this.onColorChange} value={'#' + color} name='color'/>
           <button type='submit' className='button button-small'>Save</button>
           <button onClick={this.onCancelClick} type='button' className='button button-small button-unstyled'>cancel</button>
         </form>
