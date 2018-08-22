@@ -14,6 +14,7 @@ export default React.createClass({
               return (
                 <div key={repo.id}>
                   <a href={repo.app_url} style={{fontSize: '45px'}}>
+                    <span className='octicon octicon-repo'></span>
                     {repo.full_name}
                   </a>
                 </div>
