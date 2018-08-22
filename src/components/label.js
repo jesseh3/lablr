@@ -6,35 +6,69 @@ export default React.createClass({
 
   displayName: 'Label',
 
+  getInitialState () {
+    const {name, color} = this.props.label
+    return {
+      name: name,
+      color: color
+    }
+  },
+
   onEditClick () {
     this.props.label.editing = true
   },
 
   onCancelClick () {
     this.props.label.editing = false
+    this.setState(this.getInitialState())
+  },
+
+  onNameChange (event) {
+    this.setState({
+      name: event.target.value
+    })
+  },
+
+  onColorChange (event) {
+    this.setState({
+      color: event.target.value
+    })
+  },
+
+  onSubmitForm (event) {
+    event.preventDefault()
+
+  },
+
+  onDeleteClick (event) {
+    // delete the label
   },
 
   render () {
     const {label} = this.props
+    const {name, color} = this.state
+    const cssColor = '#' + color
     let content
 
     if (label.editing) {
       content = (
-        <form className='label'>
-          <span className='label-color avatar avatar-small avatar-rounded'>&nbsp;</span>
-          <input name='name'/>
-          <input name='color'/>
+        <div>
+        <form onSubmit={this.onSubmitForm} className='label'>
+          <span style={{backgroundColor: cssColor}} className='label-color avatar avatar-small avatar-rounded'>&nbsp;</span>
+          <input onChange={this.onNameChange} value={name} name='name'/>
+          <input onChange={this.onColorChange} value={color} name='color'/>
           <button type='submit' className='button button-small'>Save</button>
           <button onClick={this.onCancelClick} type='button' className='button button-small button-unstyled'>cancel</button>
         </form>
+        </div>
       )
     } else {
       content = (
         <div className='label'>
-          <span className='label-color'>&nbsp;</span>
+          <span style={{backgroundColor: cssColor}} className='label-color'>&nbsp;</span>
           <span>{label.name}</span>
           <span onClick={this.onEditClick} className='octicon octicon-pencil'></span>
-          <span className='octicon octicon-x'></span>
+          <span onClick={this.onDeleteClick} className='octicon octicon-x'></span>
         </div>
       )
     }
