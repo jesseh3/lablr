@@ -41,7 +41,7 @@ export default React.createClass({
   },
 
   onDeleteClick (event) {
-    // delete the label
+    this.props.label.destroy()
   },
 
   render () {
