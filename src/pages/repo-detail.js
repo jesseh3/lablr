@@ -7,13 +7,24 @@ export default React.createClass({
 
   displayName: 'RepoDetailPage',
 
+  onAddClick () {
+    this.props.labels.add({
+      name: "",
+      color: "",
+      editing: true, // ok to mix session properties and regular properties
+      saved: false,
+    }, {at: 0})
+  },
+
   render () {
     const {repo, labels} = this.props
 
     return (
       <div className='container'>
         <h1>{repo.full_name} Labels</h1>
-        <p></p>
+        <p>
+          <button onClick={this.onAddClick} className='button'>Add a label</button>
+        </p>
         <ul>
           {labels.map( (label) => {
             return <Label key={label.name} label={label}/>
